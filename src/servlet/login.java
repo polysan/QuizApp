@@ -60,11 +60,11 @@ public class login extends HttpServlet {
 
 			User user = new User(name,password);
 			loginlogic loginlogic = new loginlogic();
-			boolean result = loginlogic.execute(user);
+			User result = loginlogic.execute(user);
 
-			if(result) {
+			if(result != null) {
 				HttpSession session = request.getSession();
-				session.setAttribute("USER",user);
+				session.setAttribute("USER",result);
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/loginresult.jsp");
 				dispatcher.forward(request, response);
 			}else {

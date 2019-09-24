@@ -20,7 +20,7 @@ public class registuserdao {
 			conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS);
 
 			String sql =
-			"INSERT INTO USER (NAME,PASS) VALUES (?,?)";
+			"INSERT INTO USER (NAME,PASSWORD) VALUES (?,?)";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			pStmt.setString(1, user.getName());

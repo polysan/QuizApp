@@ -33,7 +33,9 @@ for (Map.Entry<String,List<String>> bar : QAMAP.entrySet()) {
 <input type="radio" name="ques" value='bad'><%=answer.get(1) %><br>
 <input type="radio" name="ques" value='bad'><%=answer.get(2) %><br>
 <input type="radio" name="ques" value='bad'><%=answer.get(3) %><br>
+<!-- 隠しパラメーター -->
 <input type="hidden" name="action" value="kaitotyu">
+<!-- 隠しパラメーター -->
 <input type="submit" value="進む">
 </form>
 </body>

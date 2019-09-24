@@ -12,6 +12,6 @@
 </head>
 <body>
 <h1><%= loginUser.getName() %>さんがログインしました</h1>
-<a href="/Quiz/Main">クイズ画面へ</a>
+<a href="/Quiz/Main">マイページへ</a>
 </body>
 </html>

@@ -13,7 +13,7 @@ String errorMsg = (String)request.getAttribute("errorMsg");
 <%if(errorMsg != null){%>
 <p><%= errorMsg %></p>
 <%}%>
-<form action="/Quiz/Register" method="get">
+<form action="/Quiz/Register" method="post">
 ID：<input type="text" name="name"><br>
 パスワード：<input type="password" name="pass"><br>
 <input type="submit" value="確認">

@@ -13,7 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import DAO.questiondao;
+import DAO.registQuizResultdao;
 import model.Quiz_count;
+import model.User;
 
 /**
  * Servlet implementation class Question
@@ -38,11 +40,10 @@ public class Question extends HttpServlet {
 
 		int quescount = 0;
 		HttpSession session = request.getSession();
-//		Quiz_count count = (Quiz_count)session.getAttribute("QUIZCOUNT");
 		request.setCharacterEncoding("UTF-8");
 		String action = request.getParameter("action");
+
 //		1問目
-//		if(count == null){
 		if(action == null){
 			Quiz_count quizcount = new Quiz_count();
 			quizcount.setQues_count(1);
@@ -77,6 +78,11 @@ public class Question extends HttpServlet {
 		}
 
 		if(quescount > 10) {
+			User loginuser = (User)session.getAttribute("USER");
+			Quiz_count quizcount = (Quiz_count)session.getAttribute("QUIZCOUNT");
+			registQuizResultdao aa = new registQuizResultdao();
+			boolean resultset = aa.resistQuizResult(loginuser, quizcount);
+
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/Questionresult.jsp");
 			dispatcher.forward(request, response);
 		}

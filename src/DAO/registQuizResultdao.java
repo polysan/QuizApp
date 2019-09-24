@@ -3,55 +3,48 @@ package DAO;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import model.Quiz_count;
 import model.User;
 
-
-public class userdao {
+public class registQuizResultdao {
 	private final String DRIVER_NAME = "org.h2.Driver";
 	private final String JDBC_URL = "jdbc:h2:~/quiz";
 	private final String DB_USER = "sa";
 	private final String DB_PASS = "";
-	public User logincheck(User user) {
+
+	public boolean resistQuizResult(User user,Quiz_count quiz) {
+
 		Connection  conn = null;
 
-		User loginuser = null;
 		try {
 			Class.forName(DRIVER_NAME);
 			conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS);
 
 			String sql =
-			"SELECT USERID,NAME,PASSWORD FROM USER where NAME =? AND PASSWORD =?";
+			"INSERT INTO QUIZ_RESULT(CORRECTCOUNT,QUESTIONCOUNT,USERID) VALUES (?,?,?)";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
-			pStmt.setString(1, user.getName());
-			pStmt.setString(2, user.getPass());
-			ResultSet rs = pStmt.executeQuery();
-				if(rs.next()) {
-				int id = rs.getInt("USERID");
-				String userName = rs.getString("NAME");
-				String passWord = rs.getString("PASSWORD");
-				loginuser = new User(id, userName, passWord);
-				}
-
+			pStmt.setInt(1, quiz.getKaito_count());
+			pStmt.setInt(2, quiz.getQues_count()-1);
+			pStmt.setInt(3, user.getId());
+			pStmt.executeUpdate();
 		}catch(SQLException e){
 				e.printStackTrace();
-				return null;
 		}catch (ClassNotFoundException e) {
 				e.printStackTrace();
-				return null;
+				return false;
 		}finally {
 			if(conn != null) {
 				try {
 					conn.close();
 				}catch(SQLException e) {
 					e.printStackTrace();
-						return null;
+						return false;
 				}
 			}
 		}
-		return loginuser;
+	return true;
 	}
 }
