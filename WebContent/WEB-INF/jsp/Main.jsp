@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="DAO.selectQuizResultdao" %>
+<%@ page import="dao.SelectQuizResultDao" %>
 <%@ page import="model.User" %>
 <%@ page import="java.util.Map" %>
 <%@ page import="java.util.List" %>
@@ -36,6 +36,6 @@ if(qizresultmap != null){
 <p><%= anscount.get(2) %>/<%= quescount.get(2) %></p>
 <%}%> --%>
 <a href="/Quiz/Question">クイズへ進む</a><br>
-<a href="/Quiz/logout">ログアウト</a>
+<a href="/Quiz/Logout">ログアウト</a>
 </body>
 </html>

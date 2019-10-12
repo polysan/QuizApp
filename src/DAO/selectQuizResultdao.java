@@ -1,4 +1,4 @@
-package DAO;
+package dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -12,7 +12,7 @@ import java.util.Map;
 
 import model.User;
 
-public class selectQuizResultdao {
+public class SelectQuizResultDao {
 	private final String DRIVER_NAME = "org.h2.Driver";
 	private final String JDBC_URL = "jdbc:h2:~/quiz";
 	private final String DB_USER = "sa";
@@ -21,27 +21,27 @@ public class selectQuizResultdao {
 	public Map<List <Integer>,List <Integer>> selectQuizResult(User user) {
 
 		Connection  conn = null;
-//		Map<Integer,Integer> qizresultmap = new HashMap<Integer,Integer>();
-		List <Integer> anscount = new ArrayList <Integer>();
-		List <Integer> quescount = new ArrayList <Integer>();
-		Map<List <Integer>,List <Integer>> qizresultmap = new HashMap<List <Integer>,List <Integer>>();
+
+		List <Integer> ansCount = new ArrayList <Integer>();
+		List <Integer> quesCount = new ArrayList <Integer>();
+		Map<List <Integer>,List <Integer>> qizResultMap = new HashMap<List <Integer>,List <Integer>>();
 		try {
 			Class.forName(DRIVER_NAME);
 			conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS);
 
 			String sql =
-			"SELECT CORRECTCOUNT,QUESTIONCOUNT FROM QUIZ_RESULT where USERID =?";
+			"SELECT CORRECTCOUNT,QUESTIONCOUNT FROM QUIZ_RESULT WHERE USERID =?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			pStmt.setInt(1, user.getId());
 			ResultSet rs = pStmt.executeQuery();
 			while(rs.next()) {
-				int CORRECTCOUNT = rs.getInt("CORRECTCOUNT");
-				int QUESTIONCOUNT = rs.getInt("QUESTIONCOUNT");
-				anscount.add(CORRECTCOUNT);
-				quescount.add(QUESTIONCOUNT);
+				int correctCount = rs.getInt("CORRECTCOUNT");
+				int questionCount = rs.getInt("QUESTIONCOUNT");
+				ansCount.add(correctCount);
+				quesCount.add(questionCount);
 				}
-			qizresultmap.put(anscount, quescount);
+			qizResultMap.put(ansCount, quesCount);
 
 		}catch(SQLException e){
 				e.printStackTrace();
@@ -59,6 +59,6 @@ public class selectQuizResultdao {
 				}
 			}
 		}
-	return qizresultmap;
+	return qizResultMap;
 	}
 }

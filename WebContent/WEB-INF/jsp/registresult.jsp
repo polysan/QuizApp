@@ -15,6 +15,6 @@ boolean resultregist = (boolean)request.getAttribute("CANNEWREGIST");
 <%}else{%>
 <p>登録できませんでした</p>
 <%}%>
-<a href="/Quiz/login">ログイン画面へ</a>
+<a href="/Quiz/Login">ログイン画面へ</a>
 </body>
 </html>

@@ -1,15 +1,15 @@
 package model;
 
-import DAO.userdao;
+import dao.UserDao;
 
-public class loginlogic {
+public class LoginLogic {
 
-	public User execute(User user) {
-		userdao udao = new userdao();
-		User loginuser = udao.logincheck(user);
-		if(loginuser !=null) {
-			return loginuser;
-		}
-		return null;
-	}
+  public User execute(User user) {
+    UserDao udao = new UserDao();
+    User loginuser = udao.loginCheck(user);
+    if(loginuser !=null) {
+      return loginuser;
+    }
+    return null;
+  }
 }

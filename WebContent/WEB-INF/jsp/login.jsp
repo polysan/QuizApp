@@ -20,7 +20,7 @@ String errorMsg = (String)request.getAttribute("errorMsg");
 <%if(errorMsg != null){%>
 <p><%= errorMsg %></p>
 <%}%>
-<form action="/Quiz/login" method="post">
+<form action="/Quiz/Login" method="post">
 ログインID：<input type="text" name="name"><br>
 パスワード：<input type="password" name="pass"><br>
 <input type="submit" value="ログイン"><br>

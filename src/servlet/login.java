@@ -12,20 +12,20 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import Validator.Validator;
+import model.LoginLogic;
 import model.User;
-import model.loginlogic;
 
 /**
  * Servlet implementation class login
  */
-@WebServlet("/login")
-public class login extends HttpServlet {
+@WebServlet("/Login")
+public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public login() {
+    public Login() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -59,7 +59,7 @@ public class login extends HttpServlet {
 		}else {
 
 			User user = new User(name,password);
-			loginlogic loginlogic = new loginlogic();
+			LoginLogic loginlogic = new LoginLogic();
 			User result = loginlogic.execute(user);
 
 			if(result != null) {

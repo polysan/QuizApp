@@ -3,11 +3,11 @@
 <%@ page import="java.util.Map" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="model.Quiz_count" %>
+<%@ page import="model.QuizCount" %>
 
 <%
- Map<String,List<String>> QAMAP = (Map<String,List<String>>)session.getAttribute("QAMAP");
-	Quiz_count quizcount = (Quiz_count)session.getAttribute("QUIZCOUNT");
+	Map<String,List<String>> QAMAP = (Map<String,List<String>>)session.getAttribute("QAMAP");
+	QuizCount quizcount = (QuizCount)session.getAttribute("QUIZCOUNT");
 	String errorMsg = (String)request.getAttribute("errorMsg");
 
 String key = "";
@@ -24,7 +24,7 @@ for (Map.Entry<String,List<String>> bar : QAMAP.entrySet()) {
 <title>問題</title>
 </head>
 <body>
-<p>問<%= quizcount.getQues_count() %>.<%= key %></p>
+<p>問<%=quizcount.getQuesCount()%>.<%= key %></p>
 <%if(errorMsg != null){%>
 <p><%= errorMsg %></p>
 <%}%>

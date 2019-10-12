@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.List" %>
-<%@ page import="model.Quiz_count" %>
+<%@ page import="model.QuizCount" %>
 <%
-Quiz_count quizcount = (Quiz_count)session.getAttribute("QUIZCOUNT");
-int quescount = quizcount.getQues_count();
+	QuizCount quizcount = (QuizCount)session.getAttribute("QUIZCOUNT");
+int quescount = quizcount.getQuesCount();
 quescount--;
-int kaitocount = quizcount.getKaito_count();
+int kaitocount = quizcount.getKaitoCount();
 session.removeAttribute("QUIZCOUNT");
 %>
 

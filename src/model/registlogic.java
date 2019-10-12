@@ -1,11 +1,11 @@
 package model;
 
-import DAO.registuserdao;
+import dao.RegistUserDao;
 
-public class registlogic {
+public class RegistLogic {
 	public boolean execute(User user) {
-		registuserdao rdao = new registuserdao();
-		boolean canRegist = rdao.NewRegist(user);
+		RegistUserDao rdao = new RegistUserDao();
+		boolean canRegist = rdao.newRegist(user);
 		return canRegist;
 	}
 }

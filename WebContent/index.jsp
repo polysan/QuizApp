@@ -8,7 +8,7 @@
 </head>
 <body>
 <h1>ようこそ</h1>
-<a href="/Quiz/login">ログイン</a><br>
+<a href="/Quiz/Login">ログイン</a><br>
 <a href="/Quiz/Register">ユーザー登録</a>
 </body>
 </html>

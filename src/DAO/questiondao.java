@@ -1,4 +1,4 @@
-package DAO;
+package dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -10,45 +10,40 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class questiondao {
+public class QuestionDao {
 	private final String DRIVER_NAME = "org.h2.Driver";
 	private final String JDBC_URL = "jdbc:h2:~/quiz";
 	private final String DB_USER = "sa";
 	private final String DB_PASS = "";
 
-	public Map<String,List<String>> getQuestion_Answer(int quescount) {
+	public Map<String,List<String>> getQuestionAnswer(int quescount) {
+
 
 		Connection  conn = null;
-		Map<String,List<String>> QA_map = new HashMap<String,List<String>>();
+		Map<String,List<String>> qaMap = new HashMap<String,List<String>>();
 		String Q = "";
 		String A = "";
-		List <String> answerlist = new ArrayList <String>();
+		List <String> answerList = new ArrayList <String>();
 		try {
 			Class.forName(DRIVER_NAME);
 			conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS);
 
 			String sql =
-			"SELECT QUESTION FROM QUESTION where ID =?";
+			"SELECT Q.QUESTION, QA.ANSWER FROM QUESTION Q LEFT OUTER JOIN QUESTION_ANSWER QA ON Q.ID = QA.QID WHERE Q.ID =? AND QA.QID =?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			pStmt.setInt(1, quescount);
-
-			String sql2 =
-			"SELECT ANSWER FROM QUESTION_ANSWER where QID =?";
-			PreparedStatement pStmt2 = conn.prepareStatement(sql2);
-
-			pStmt2.setInt(1, quescount);
+			pStmt.setInt(2, quescount);
 
 			ResultSet rs = pStmt.executeQuery();
-				while(rs.next()) {
-					Q = rs.getString("QUESTION");
-				}
-			ResultSet rs2 = pStmt2.executeQuery();
-				while(rs2.next()) {
-					A = rs2.getString("ANSWER");
-					answerlist.add(A);
-				}
-				QA_map.put(Q, answerlist);
+
+			while(rs.next()) {
+				Q = rs.getString("QUESTION");
+				A = rs.getString("ANSWER");
+				answerList.add(A);
+			}
+			qaMap.put(Q, answerList);
+
 		}catch(SQLException e){
 				e.printStackTrace();
 				return null;
@@ -65,6 +60,6 @@ public class questiondao {
 				}
 			}
 		}
-		return QA_map;
+		return qaMap;
 	}
 }

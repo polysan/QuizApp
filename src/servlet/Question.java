@@ -12,9 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import DAO.questiondao;
-import DAO.registQuizResultdao;
-import model.Quiz_count;
+import dao.QuestionDao;
+import dao.RegistQuizResultDao;
+import model.QuizCount;
 import model.User;
 
 /**
@@ -45,32 +45,32 @@ public class Question extends HttpServlet {
 
 //		1問目
 		if(action == null){
-			Quiz_count quizcount = new Quiz_count();
-			quizcount.setQues_count(1);
-			quescount = quizcount.getQues_count();
+			QuizCount quizcount = new QuizCount();
+			quizcount.setQuesCount(1);
+			quescount = quizcount.getQuesCount();
 			session.setAttribute("QUIZCOUNT",quizcount);
 
-			questiondao qdao = new questiondao();
+			QuestionDao qdao = new QuestionDao();
 			session.setAttribute("QDAO",qdao);
-			Map<String,List<String>> QA = qdao.getQuestion_Answer(quescount);
+			Map<String,List<String>> QA = qdao.getQuestionAnswer(quescount);
 			session.setAttribute("QAMAP",QA);
 //		2問目以降
 		}else {
 			request.setCharacterEncoding("UTF-8");
 			String ques = request.getParameter("ques");
-			Quiz_count quizcount = (Quiz_count)session.getAttribute("QUIZCOUNT");
+			QuizCount quizcount = (QuizCount)session.getAttribute("QUIZCOUNT");
 			if(ques != null && ques.length() != 0) {
 				if(ques.equals("good")) {
-					int kaitoCount = quizcount.getKaito_count();
+					int kaitoCount = quizcount.getKaitoCount();
 					kaitoCount++;
-					quizcount.setKaito_count(kaitoCount);
+					quizcount.setKaitoCount(kaitoCount);
 				}
-				quescount = quizcount.getQues_count();
+				quescount = quizcount.getQuesCount();
 				quescount++;
-				quizcount.setQues_count(quescount);
+				quizcount.setQuesCount(quescount);
 				session.setAttribute("QUIZCOUNT",quizcount);
-				questiondao qdao = (questiondao)session.getAttribute("QDAO");
-				Map<String,List<String>> QA = qdao.getQuestion_Answer(quescount);
+				QuestionDao qdao = (QuestionDao)session.getAttribute("QDAO");
+				Map<String,List<String>> QA = qdao.getQuestionAnswer(quescount);
 				session.setAttribute("QAMAP",QA);
 			}else {
 				request.setAttribute("errorMsg", "回答を選択してください");
@@ -79,15 +79,16 @@ public class Question extends HttpServlet {
 
 		if(quescount > 10) {
 			User loginuser = (User)session.getAttribute("USER");
-			Quiz_count quizcount = (Quiz_count)session.getAttribute("QUIZCOUNT");
-			registQuizResultdao aa = new registQuizResultdao();
+			QuizCount quizcount = (QuizCount)session.getAttribute("QUIZCOUNT");
+			RegistQuizResultDao aa = new RegistQuizResultDao();
 			boolean resultset = aa.resistQuizResult(loginuser, quizcount);
 
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/Questionresult.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/questionresult.jsp");
 			dispatcher.forward(request, response);
-		}
+		}else {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/question.jsp");
 		dispatcher.forward(request, response);
+		}
 	}
 
 	/**

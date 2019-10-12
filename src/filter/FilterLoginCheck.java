@@ -30,7 +30,7 @@ import model.User;
 				"/Main",
 				"/Question",
 				"/Questionresult",
-				"/logout"
+				"/Logout"
 		})
 public class FilterLoginCheck implements Filter {
 
@@ -61,7 +61,7 @@ public class FilterLoginCheck implements Filter {
 			chain.doFilter(request, response);
 		}else {
 			request.setAttribute("errorMsg", "ログインしてください");
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/login");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/Login");
 			dispatcher.forward(request, response);
 		}
 	}

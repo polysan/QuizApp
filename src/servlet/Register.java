@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.RegistLogic;
 import model.User;
-import model.registlogic;
 
 /**
  * Servlet implementation class Register
@@ -37,30 +37,15 @@ public class Register extends HttpServlet {
 		String forwardPath = null;
 
 		String action = request.getParameter("action");
+
 		if(action == null) {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/register.jsp");
 			dispatcher.forward(request, response);
-//			request.setCharacterEncoding("UTF-8");
-//			String name = request.getParameter("name");
-//			String password = request.getParameter("pass");
-//
-//			if((name != null && name.length() != 0)&&(password != null && password.length() != 0)) {
-//				User registuser = new User(name,password);
-//				HttpSession session = request.getSession();
-//				session.setAttribute("REGISTUSER", registuser);
-//
-//				RequestDispatcher dispatcher1 = request.getRequestDispatcher("/WEB-INF/jsp/registerConfirm.jsp");
-//				dispatcher1.forward(request, response);
-//			}else {
-//				request.setAttribute("errorMsg", "IDとパスワードを入力してください");
-//				RequestDispatcher dispatcher2 = request.getRequestDispatcher("/WEB-INF/jsp/register.jsp");
-//				dispatcher2.forward(request, response);
-//			}
 		}
 		else if(action.equals("done")) {
 			HttpSession session = request.getSession();
 			User registuser = (User)session.getAttribute("REGISTUSER");
-			registlogic logic = new registlogic();
+			RegistLogic logic = new RegistLogic();
 			boolean result = logic.execute(registuser);
 			if(result) {
 				session.removeAttribute("REGISTUSER");
@@ -89,7 +74,8 @@ public class Register extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.setAttribute("REGISTUSER", registuser);
 
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/registerConfirm.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/registerconfirm.jsp");
+//			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/register.jsp");
 			dispatcher.forward(request, response);
 		}else {
 			request.setAttribute("errorMsg", "IDとパスワードを入力してください");
