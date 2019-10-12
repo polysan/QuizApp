@@ -22,12 +22,9 @@ public class UserDao {
 		PreparedStatement pStmt = null;
 		User loginuser = null;
 		try {
-
 			InitialContext ic = new InitialContext();
 			DataSource ds = (DataSource)ic.lookup("java:/comp/env/jdbc/Quiz");
 			connection = ds.getConnection();
-
-
 
 //			Class.forName(DRIVER_NAME);
 //			conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS);
@@ -39,16 +36,16 @@ public class UserDao {
 			pStmt.setString(1, user.getName());
 			pStmt.setString(2, user.getPass());
 			ResultSet rs = pStmt.executeQuery();
-				if(rs.next()) {
+			if(rs.next()) {
 				int id = rs.getInt("USERID");
 				String userName = rs.getString("NAME");
 				String passWord = rs.getString("PASSWORD");
 				loginuser = new User(id, userName, passWord);
-				}
+			}
 
 		}catch(Exception e){
-				e.printStackTrace();
-				return null;
+			e.printStackTrace();
+			return null;
 		}finally {
 			if(connection != null) {
 				try {
