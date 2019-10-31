@@ -13,9 +13,7 @@ String errorMsg = (String)request.getAttribute("errorMsg");
 </head>
 <body>
 <div id="home" class="big-bg">
-
 	<%@include file="../html/header.html" %>
-
 	<div class="login-content">
 		<%if(error.size() > 0){%>
 		  <%for(int i = 0; i < error.size() ; i++){%>

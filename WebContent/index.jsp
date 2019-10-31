@@ -10,9 +10,7 @@
 
 <body>
 <div id="home" class="big-bg">
-
 	<%@include file="WEB-INF/html/header.html" %>
-
 	<div class="home-content wrapper">
 		<h2 class="page-title">養豚検定</h2>
 		<p>養豚検定は養豚に関する知識をクイズで試すことができます</p>

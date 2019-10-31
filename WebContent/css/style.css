@@ -16,7 +16,14 @@ a {
 img {
 	max-width: 100%;
 }
-
+table {
+	border-collapse: collapse;
+}
+table th, table td {
+	text-align: center;
+	border: solid 1px black;
+	padding: 10px 20px;
+}
 input {
     margin: 20px;
 }
@@ -33,6 +40,10 @@ input[type="submit"]{
 	border-radius: 5px;
 	padding: 10px 50px;
 }
+input[type="submit"]:hover {
+	background: #0090aa;
+}
+
 /* header */
 .logo {
 	width: 180px;
@@ -97,9 +108,68 @@ input[type="submit"]{
     border-style: solid;
     border-radius: 8px;;
 }
-
+.login-content p {
+	text-align:center;
+}
 .login-content a{
 	margin: 0 20px;
+}
+/* ログアウト画面 */
+.logout-content {
+	margin:5% auto;
+	padding: 16px;
+	width:250px;
+	border-width: medium;
+	border-color: darkgrey;
+    border-style: solid;
+    border-radius: 8px;;
+}
+.logout-content p {
+	text-align:center;
+}
+.logout-content a {
+	font-size: 1rem;
+	background: yellowgreen;
+	color: #fff;
+	border-radius: 5px;
+	padding: 10px 10px;
+	text-align:center;
+}
+.logout-button {
+	margin: 20px 10px 15px 33px;
+}
+/* 新規登録画面 */
+.register-content {
+	margin:5% auto;
+	padding: 16px;
+	width:250px;
+	border-width: medium;
+	border-color: darkgrey;
+    border-style: solid;
+    border-radius: 8px;;
+}
+.register-content p {
+	text-align: center;
+}
+.register-button {
+	margin: 20px 10px 15px 33px;
+}
+.register-button a {
+	font-size: 1rem;
+	background: yellowgreen;
+	color: #fff;
+	border-radius: 5px;
+	padding: 10px 50px;
+}
+.registresult-button {
+	margin: 20px 5px 20px 40px;
+}
+.registresult-button a {
+	font-size: 1rem;
+	background: yellowgreen;
+	color: #fff;
+	border-radius: 5px;
+	padding: 10px 10px;
 }
 
 /* ボタン */
@@ -139,4 +209,63 @@ input[type="submit"]{
 
 #home .page-title {
 	text-transform: none;
+}
+/* MyPage画面 */
+.mypage-top {
+	display: flex;
+	padding: 30px 0 15px;
+}
+.mypage-top h1 {
+	padding: 10px 10px 10px 0;
+}
+.mypage-top p {
+	padding: 25px 20px 10px;
+}
+.mypage-middle {
+	padding: 15px 0 30px;
+}
+.mypage-bottom {
+	display: flex;
+	padding: 30px 0 15px;
+}
+.mypage-bottom a {
+	font-size: 1rem;
+	background: yellowgreen;
+	color: #fff;
+	border-radius: 5px;
+	padding: 10px 50px;
+	margin-right: 15px;
+}
+
+.mypage-bottom a:hover {
+	background: #0090aa;
+}
+
+/* クイズ回答画面 */
+.quiz-content {
+	margin:5% auto;
+	padding: 16px;
+	width:250px;
+	border-width: medium;
+	border-color: darkgrey;
+    border-style: solid;
+    border-radius: 8px;
+}
+/* クイズ結果画面 */
+.quiz-result  {
+	margin-top: 50px;
+}
+.quiz-result-button {
+	margin-top: 80px;
+}
+.quiz-result a {
+	font-size: 1rem;
+	background: yellowgreen;
+	color: #fff;
+	border-radius: 5px;
+	padding: 10px 50px;
+	margin-right: 15px;
+}
+.quiz-result a:hover {
+	background: #0090aa;
 }

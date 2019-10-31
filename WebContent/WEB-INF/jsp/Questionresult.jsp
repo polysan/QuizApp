@@ -13,12 +13,19 @@ session.removeAttribute("QUIZCOUNT");
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
 <title>クイズ結果</title>
+<%@include file="../html/head.html" %>
 </head>
 <body>
-<h1>結果</h1>
-<p><%= quescount %>問中,<%= kaitocount %>問正解！</p>
-<a href="/Quiz/Main">メイン画面に戻る</a>
+<div id="home" class="big-bg">
+	<%@include file="../html/header.html" %>
+	<div class="quiz-result wrapper">
+		<h1><%= quescount %>問中,<%= kaitocount %>問正解！</h1>
+		<div class="quiz-result-button">
+			<a href="/Quiz/Question">もう一度クイズに挑戦する</a>
+			<a href="/Quiz/Main">MyPageに戻る</a>
+		</div>
+	</div>
+</div>
 </body>
 </html>

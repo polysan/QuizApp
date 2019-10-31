@@ -65,7 +65,7 @@ public class Login extends HttpServlet {
 			if(result != null) {
 				HttpSession session = request.getSession();
 				session.setAttribute("USER",result);
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/loginresult.jsp");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/main.jsp");
 				dispatcher.forward(request, response);
 			}else {
 				response.sendRedirect("/Quiz/login");
