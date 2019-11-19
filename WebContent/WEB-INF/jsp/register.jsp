@@ -14,10 +14,10 @@ String errorMsg = (String)request.getAttribute("errorMsg");
 
 	<%@include file="../html/header.html" %>
 
-	<%if(errorMsg != null){%>
+	<div class="login-content">
+		<%if(errorMsg != null){%>
 	<p><%= errorMsg %></p>
 	<%}%>
-	<div class="login-content">
 		<form action="/Quiz/Register" method="post">
 		<input type="text" placeholder="登録ID" name="name"><br>
 		<input type="password" placeholder="登録パスワード" name="pass"><br>

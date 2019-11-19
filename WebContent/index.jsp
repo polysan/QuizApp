@@ -17,7 +17,7 @@
 		<section class="buttons">
 			<a class="button" href="/Quiz/Login">ログイン</a><br>
 			<a class="button" href="/Quiz/Register">ユーザー登録</a><br>
-			<a class="button" href="/">ログインせずに<br>クイズに進む</a><br>
+			<a class="button" href="/Quiz/Login">ログインせずに<br>クイズに進む</a><br>
 		</section>
 		<p>※ログインすると検定結果を記録することができます</p>
 	</div><!-- home-content -->

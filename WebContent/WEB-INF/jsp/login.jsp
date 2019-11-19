@@ -2,7 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList" %>
 <%
+/* IDとパスワード入力チェック */
 ArrayList<String> error = (ArrayList<String>) request.getAttribute("error");
+/* フィルターのログインチェック */
 String errorMsg = (String)request.getAttribute("errorMsg");
 %>
 <!DOCTYPE html>
