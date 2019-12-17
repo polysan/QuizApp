@@ -1,8 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import dao.QuestionDao;
 import dao.RegistQuizResultDao;
 import model.QuizCount;
+import model.QuizOneSet;
 import model.User;
 
 /**
@@ -39,6 +38,7 @@ public class Question extends HttpServlet {
 			throws ServletException, IOException {
 
 		int quescount = 0;
+		QuizOneSet[] questionlist = new QuizOneSet[10];
 		HttpSession session = request.getSession();
 		request.setCharacterEncoding("UTF-8");
 		String action = request.getParameter("action");
@@ -49,11 +49,15 @@ public class Question extends HttpServlet {
 			quizcount.setQuesCount(1);
 			quescount = quizcount.getQuesCount();
 			session.setAttribute("QUIZCOUNT",quizcount);
-
 			QuestionDao qdao = new QuestionDao();
 			session.setAttribute("QDAO",qdao);
-			Map<String,List<String>> QA = qdao.getQuestionAnswer(quescount);
-			session.setAttribute("QAMAP",QA);
+			for(int i=0; i < 10; i++){
+				QuizOneSet QSET = qdao.getQuestionAnswer(i);
+				QuizOneSet.ArrayOrderRandom(QSET.getAnswers());
+				questionlist[i] = QSET;
+			}
+			QuizOneSet.ArrayOrderRandom(questionlist);
+			session.setAttribute("QUESTIONLIST",questionlist);
 //		2問目以降
 		}else {
 			request.setCharacterEncoding("UTF-8");
@@ -70,7 +74,7 @@ public class Question extends HttpServlet {
 				quizcount.setQuesCount(quescount);
 				session.setAttribute("QUIZCOUNT",quizcount);
 				QuestionDao qdao = (QuestionDao)session.getAttribute("QDAO");
-				Map<String,List<String>> QA = qdao.getQuestionAnswer(quescount);
+				QuizOneSet QA = qdao.getQuestionAnswer(quescount);
 				session.setAttribute("QAMAP",QA);
 			}else {
 				request.setAttribute("errorMsg", "回答を選択してください");
