@@ -37,8 +37,9 @@ public class Question extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		int quescount = 0;
+		int quescountnumber;
 		QuizOneSet[] questionlist = new QuizOneSet[10];
+		QuestionDao qdao = new QuestionDao();
 		HttpSession session = request.getSession();
 		request.setCharacterEncoding("UTF-8");
 		String action = request.getParameter("action");
@@ -47,12 +48,10 @@ public class Question extends HttpServlet {
 		if(action == null){
 			QuizCount quizcount = new QuizCount();
 			quizcount.setQuesCount(1);
-			quescount = quizcount.getQuesCount();
+			quescountnumber = quizcount.getQuesCount();
 			session.setAttribute("QUIZCOUNT",quizcount);
-			QuestionDao qdao = new QuestionDao();
-			session.setAttribute("QDAO",qdao);
-			for(int i=0; i < 10; i++){
-				QuizOneSet QSET = qdao.getQuestionAnswer(i);
+			for(int i = 0; i < 10; i++){
+				QuizOneSet QSET = qdao.getQuestionAnswer(i+1);
 				QuizOneSet.ArrayOrderRandom(QSET.getAnswers());
 				questionlist[i] = QSET;
 			}
@@ -62,31 +61,35 @@ public class Question extends HttpServlet {
 		}else {
 			request.setCharacterEncoding("UTF-8");
 			String ques = request.getParameter("ques");
+//			何問目かカウントするオブジェクトをセッションから取得
 			QuizCount quizcount = (QuizCount)session.getAttribute("QUIZCOUNT");
+			quescountnumber = quizcount.getQuesCount();
+//			回答が選択されているかチェック
 			if(ques != null && ques.length() != 0) {
-				if(ques.equals("good")) {
-					int kaitoCount = quizcount.getKaitoCount();
-					kaitoCount++;
-					quizcount.setKaitoCount(kaitoCount);
+//				セッションから問題オブジェクトリストを取得
+				QuizOneSet[] quizoneset  = (QuizOneSet[])session.getAttribute("QUESTIONLIST");
+				QuizOneSet qesset  = quizoneset[quescountnumber-1];
+//				選択した回答が正解かチェック
+				if(ques.equals(qesset.getcorrectAnswer())) {
+					int correctAnswerCount = quizcount.getCorrectAnswerCount();
+					correctAnswerCount++;
+					quizcount.setCorrectAnswerCount(correctAnswerCount);
 				}
-				quescount = quizcount.getQuesCount();
-				quescount++;
-				quizcount.setQuesCount(quescount);
+				quescountnumber++;
+				quizcount.setQuesCount(quescountnumber);
 				session.setAttribute("QUIZCOUNT",quizcount);
-				QuestionDao qdao = (QuestionDao)session.getAttribute("QDAO");
-				QuizOneSet QA = qdao.getQuestionAnswer(quescount);
-				session.setAttribute("QAMAP",QA);
 			}else {
 				request.setAttribute("errorMsg", "回答を選択してください");
 			}
 		}
-
-		if(quescount > 10) {
+//		クイズ終了時
+		if(quescountnumber > 10) {
+//			クイズの成績をユーザーに登録
 			User loginuser = (User)session.getAttribute("USER");
 			QuizCount quizcount = (QuizCount)session.getAttribute("QUIZCOUNT");
 			RegistQuizResultDao aa = new RegistQuizResultDao();
 			boolean resultset = aa.resistQuizResult(loginuser, quizcount);
-
+//			クイズ結果画面に遷移
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/questionresult.jsp");
 			dispatcher.forward(request, response);
 		}else {

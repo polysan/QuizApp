@@ -1,7 +1,6 @@
 package dao;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
@@ -35,7 +34,7 @@ public class RegistQuizResultDao {
 			"INSERT INTO QUIZ_RESULT(CORRECTCOUNT,QUESTIONCOUNT,USERID) VALUES (?,?,?)";
 			pStmt = connection.prepareStatement(sql);
 
-			pStmt.setInt(1, quiz.getKaitoCount());
+			pStmt.setInt(1, quiz.getCorrectAnswerCount());
 			pStmt.setInt(2, quiz.getQuesCount()-1);
 			pStmt.setInt(3, user.getId());
 			pStmt.executeUpdate();

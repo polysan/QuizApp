@@ -16,11 +16,8 @@ public class QuestionDao {
 
 		Connection  connection = null;
 		PreparedStatement pStmt = null;
-		QuizOneSet quizlist = new QuizOneSet();
-//		Map<String,List<String>> qaMap = new HashMap<String,List<String>>();
-//		String Q = "";
-//		String A = "";
-//		List <String> answerList = new ArrayList <String>();
+		QuizOneSet quizOneset = new QuizOneSet();
+
 		try {
 			InitialContext ic = new InitialContext();
 			DataSource ds = (DataSource)ic.lookup("java:/comp/env/jdbc/Quiz");
@@ -36,17 +33,14 @@ public class QuestionDao {
 			ResultSet rs = pStmt.executeQuery();
 			int i = 0;
 			while(rs.next()) {
-				quizlist.setQuestion(rs.getString("QUESTION"));
-				quizlist.getAnswers()[i] = rs.getString("ANSWER");
+				quizOneset.setQuestion(rs.getString("QUESTION"));
+				quizOneset.getAnswers()[i] = rs.getString("ANSWER");
+				if(i == 0) {
+//					正解の回答を変数に格納
+					quizOneset.setcorrectAnswer(quizOneset.getAnswers()[i]);
+				}
 				i++;
 			}
-//			while(rs.next()) {
-//				Q = rs.getString("QUESTION");
-//				A = rs.getString("ANSWER");
-//				answerList.add(A);
-//			}
-//			qaMap.put(Q, answerList);
-
 		}catch(Exception e){
 				e.printStackTrace();
 				return null;
@@ -61,6 +55,6 @@ public class QuestionDao {
 				}
 			}
 		}
-		return quizlist;
+		return quizOneset;
 	}
 }

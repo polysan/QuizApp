@@ -1,9 +1,14 @@
 package model;
 
 public class QuizOneSet {
+//	問題文格納変数
 	private String question;
+//	回答群格納変数
 	private String [] answers = new String [4];
+//	正解の回答格納変数
+	private String correctAnswer;
 
+//	選択肢のシャッフル
 	public static void ArrayOrderRandom(String[] ary ) {
 		for ( int i = 0; i < ary.length; ++ i ) {
 			int rnd = (int)( Math.random() * (double)ary.length );
@@ -12,6 +17,7 @@ public class QuizOneSet {
 			ary[ rnd ] = w;
 		}
 	}
+//	全問題のシャッフル
 	public static void ArrayOrderRandom(QuizOneSet[] ary ) {
 		for ( int i = 0; i < ary.length; ++ i ) {
 			int rnd = (int)( Math.random() * (double)ary.length );
@@ -31,5 +37,11 @@ public class QuizOneSet {
 	}
 	public void setAnswers(String [] answers) {
 		this.answers = answers;
+	}
+	public String getcorrectAnswer() {
+		return correctAnswer;
+	}
+	public void setcorrectAnswer(String correctAnswer) {
+		this.correctAnswer = correctAnswer;
 	}
 }

@@ -1,13 +1,10 @@
 package Validator;
-
 import java.util.ArrayList;
 
 public class Validator {
 
 	public static ArrayList<String> validate(String value1, String value2, String name1, String name2){
-
 	    ArrayList<String> error = new ArrayList<>();
-
 	    String errorcheck = "";
 
 	    errorcheck = checkEmpty(value1,name1);

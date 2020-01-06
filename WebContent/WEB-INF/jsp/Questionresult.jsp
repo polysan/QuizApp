@@ -6,7 +6,7 @@
 	QuizCount quizcount = (QuizCount)session.getAttribute("QUIZCOUNT");
 int quescount = quizcount.getQuesCount();
 quescount--;
-int kaitocount = quizcount.getKaitoCount();
+int kaitocount = quizcount.getCorrectAnswerCount();
 session.removeAttribute("QUIZCOUNT");
 %>
 
